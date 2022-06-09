@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,9 @@ Route::post('/posts', [PostController::class, 'store']);
 Route::get('/post/{slug}', [PostController::class, 'show']);
 Route::put('/post/{post}', [PostController::class, 'update']);
 Route::delete('/post', [PostController::class, 'destroy']);
+
+// add comments routes
+Route::post('/post/comment', [CommentController::class,'store']);
 
 
 // Fallback ROUTE is route is not found

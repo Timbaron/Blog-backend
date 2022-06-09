@@ -18,7 +18,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::with('author')->latest()->paginate(10);
+        $posts = Post::with('author','comments')->withCount('comments')->latest()->paginate(10);
 
         return response()->json([
             'posts' => $posts,
@@ -60,7 +60,7 @@ class PostController extends Controller
      */
     public function show($slug)
     {
-        $post = Post::where('slug', $slug)->first();
+        $post = Post::with('author','comments')->withCount('comments')->where('slug', $slug)->first();
         return response()->json([
             'post' => $post,
             'type' => 'success',
